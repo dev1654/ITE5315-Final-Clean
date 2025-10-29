@@ -1,73 +1,55 @@
 <h1>{{title}}</h1>
 
 <div class="search-options">
-    {{#if errors}}
-        <div class="error-messages">
-            {{#each errors}}
-                <div class="error">{{this.msg}}</div>
-            {{/each}}
-        </div>
-    {{/if}}
-
-    <form action="/search/results" method="POST">
+    <form action="/search/results" method="GET">
         <div class="form-group">
             <label for="searchType">Search By:</label>
             <select id="searchType" name="searchType" onchange="toggleSearchFields()">
-                <option value="name" {{#if formData.searchType}}{{#if (formData.searchType '==' 'name')}}selected{{/if}}{{/if}}>Property Name</option>
-                <option value="id" {{#if formData.searchType}}{{#if (formData.searchType '==' 'id')}}selected{{/if}}{{/if}}>Property ID</option>
-                <option value="neighbourhood" {{#if formData.searchType}}{{#if (formData.searchType '==' 'neighbourhood')}}selected{{/if}}{{/if}}>Neighbourhood</option>
-                <option value="property_type" {{#if formData.searchType}}{{#if (formData.searchType '==' 'property_type')}}selected{{/if}}{{/if}}>Property Type</option>
-                <option value="all" {{#if formData.searchType}}{{#if (formData.searchType '==' 'all')}}selected{{/if}}{{/if}}>All Fields</option>
+                <option value="name">Property Name</option>
+                <option value="id">Property ID</option>
+                <option value="neighbourhood">Neighbourhood</option>
+                <option value="property_type">Property Type</option>
+                <option value="all">All Fields</option>
             </select>
         </div>
 
         <!-- Name Search -->
-        <div class="search-field" id="nameField" {{#unless formData.searchType}}{{else if (formData.searchType '!=' 'name')}}style="display:none;"{{/unless}}>
+        <div class="search-field" id="nameField" style="display: none;">
             <div class="form-group">
                 <label for="name">Property Name:</label>
-                <input type="text" id="name" name="name"
-                       value="{{formData.name}}"
-                       placeholder="Enter property name...">
+                <input type="text" id="name" name="name" placeholder="Enter property name...">
             </div>
         </div>
 
         <!-- ID Search -->
-        <div class="search-field" id="idField" {{#unless formData.searchType}}{{else if (formData.searchType '!=' 'id')}}style="display:none;"{{/unless}}>
+        <div class="search-field" id="idField" style="display: none;">
             <div class="form-group">
                 <label for="id">Property ID:</label>
-                <input type="text" id="id" name="id"
-                       value="{{formData.id}}"
-                       placeholder="Enter property ID...">
+                <input type="text" id="id" name="id" placeholder="Enter property ID...">
             </div>
         </div>
 
         <!-- Neighbourhood Search -->
-        <div class="search-field" id="neighbourhoodField" {{#unless formData.searchType}}{{else if (formData.searchType '!=' 'neighbourhood')}}style="display:none;"{{/unless}}>
+        <div class="search-field" id="neighbourhoodField" style="display: none;">
             <div class="form-group">
                 <label for="neighbourhood">Neighbourhood:</label>
-                <input type="text" id="neighbourhood" name="neighbourhood"
-                       value="{{formData.neighbourhood}}"
-                       placeholder="Enter neighbourhood...">
+                <input type="text" id="neighbourhood" name="neighbourhood" placeholder="Enter neighbourhood...">
             </div>
         </div>
 
         <!-- Property Type Search -->
-        <div class="search-field" id="propertyTypeField" {{#unless formData.searchType}}{{else if (formData.searchType '!=' 'property_type')}}style="display:none;"{{/unless}}>
+        <div class="search-field" id="propertyTypeField" style="display: none;">
             <div class="form-group">
                 <label for="property_type">Property Type:</label>
-                <input type="text" id="property_type" name="property_type"
-                       value="{{formData.property_type}}"
-                       placeholder="Enter property type...">
+                <input type="text" id="property_type" name="property_type" placeholder="Enter property type...">
             </div>
         </div>
 
         <!-- All Fields Search -->
-        <div class="search-field" id="allField" {{#unless formData.searchType}}{{else if (formData.searchType '!=' 'all')}}style="display:none;"{{/unless}}>
+        <div class="search-field" id="allField" style="display: none;">
             <div class="form-group">
                 <label for="allTerms">Search All Fields:</label>
-                <input type="text" id="allTerms" name="allTerms"
-                       value="{{formData.allTerms}}"
-                       placeholder="Enter search terms...">
+                <input type="text" id="allTerms" name="allTerms" placeholder="Enter search terms...">
             </div>
         </div>
 
@@ -97,11 +79,9 @@
         document.querySelectorAll('input[type="text"]').forEach(input => {
             input.value = '';
         });
-        document.querySelectorAll('input[type="number"]').forEach(input => {
-            input.value = '';
-        });
     }
 
+    // Initialize on page load
     document.addEventListener('DOMContentLoaded', function() {
         toggleSearchFields();
     });
