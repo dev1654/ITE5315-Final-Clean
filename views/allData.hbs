@@ -1,0 +1,21 @@
+<h1>{{title}}</h1>
+<p>Displaying {{data.length}} properties from Assignment 1</p>
+
+<div class="properties-grid">
+    {{#each data}}
+        <div class="property-card">
+            <img src="{{this.thumbnail}}" alt="{{this.NAME}}" width="200">
+            <h3>
+                {{#if this.NAME}}
+                    {{this.NAME}}
+                {{else}}
+                    <span style="color: red;">No Name Available</span>
+                {{/if}}
+            </h3>
+            <p><strong>Price:</strong> {{this.price}}</p>
+            <p><strong>Type:</strong> {{this.[room type]}}</p>  <!-- Fixed -->
+            <p><strong>Location:</strong> {{this.neighbourhood}}, {{this.[neighbourhood group]}}</p>  <!-- Fixed -->
+            <p><strong>Rating:</strong> {{this.[review rate number]}}/5 ({{this.[number of reviews]}} reviews)</p>  <!-- Fixed -->
+        </div>
+    {{/each}}
+</div>

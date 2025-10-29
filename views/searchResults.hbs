@@ -1,0 +1,176 @@
+<h1>{{title}}</h1>
+
+<div class="search-summary">
+    {{#if searchType}}
+        <p><strong>Search Type:</strong> {{searchType}}</p>
+    {{/if}}
+
+    {{#if searchTerm}}
+        <p><strong>Search For:</strong> "{{searchTerm}}"</p>
+    {{/if}}
+
+    {{#if results.length}}
+        <p><strong>Found:</strong> {{results.length}} properties</p>
+    {{else}}
+        <p><strong>No properties found</strong> matching your search criteria.</p>
+    {{/if}}
+</div>
+
+{{#if results.length}}
+    <div class="search-results">
+        {{#each results}}
+            <div class="result-item">
+                <div class="result-image">
+                    <img src="{{this.thumbnail}}" alt="{{this.NAME}}" width="200" height="150">
+                </div>
+                <div class="result-details">
+                    <h3>
+                        {{#if this.NAME}}
+                            {{this.NAME}}
+                        {{else}}
+                            <span style="color: red; font-style: italic;">No Name Available</span>
+                        {{/if}}
+                    </h3>
+
+                    <div class="property-info">
+                        <div class="info-item">
+                            <strong>ID:</strong> {{this.id}}
+                        </div>
+                        <div class="info-item">
+                            <strong>Type:</strong> {{this.[room type]}}
+                        </div>
+                        <div class="info-item">
+                            <strong>Location:</strong> {{this.neighbourhood}}, {{this.[neighbourhood group]}}
+                        </div>
+                        <div class="info-item">
+                            <strong>Price:</strong> {{this.price}}
+                        </div>
+                        <div class="info-item">
+                            <strong>Rating:</strong> {{this.[review rate number]}}/5 ({{this.[number of reviews]}} reviews)
+                        </div>
+                        <div class="info-item">
+                            <strong>Host:</strong> {{this.[host name]}}
+                        </div>
+                        <div class="info-item">
+                            <strong>Minimum Nights:</strong> {{this.[minimum nights]}}
+                        </div>
+                    </div>
+
+                    <div class="property-features">
+                        {{#if this.instant_bookable}}
+                            <span class="feature-tag">Instant Bookable</span>
+                        {{/if}}
+                        {{#if this.[host_identity_verified]}}
+                            <span class="feature-tag">Verified Host</span>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+{{/if}}
+
+<div class="search-actions">
+    <a href="/search/propertyLine" class="btn">← New Search</a>
+    <a href="/viewData" class="btn">View All Data</a>
+</div>
+
+<style>
+    .search-summary {
+        background-color: #f8f9fa;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        border-left: 4px solid #3498db;
+    }
+
+    .search-results {
+        margin: 1.5rem 0;
+    }
+
+    .result-item {
+        display: flex;
+        border: 1px solid #e1e8ed;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        background: white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .result-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    .result-image {
+        flex: 0 0 200px;
+        margin-right: 1.5rem;
+    }
+
+    .result-image img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+
+    .result-details {
+        flex: 1;
+    }
+
+    .result-details h3 {
+        margin: 0 0 1rem 0;
+        color: #2c3e50;
+        font-size: 1.3rem;
+    }
+
+    .property-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .info-item {
+        padding: 0.25rem 0;
+    }
+
+    .property-features {
+        margin-top: 1rem;
+    }
+
+    .feature-tag {
+        display: inline-block;
+        background-color: #e1f5fe;
+        color: #0277bd;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .search-actions {
+        margin-top: 2rem;
+        text-align: center;
+    }
+
+    .btn {
+        display: inline-block;
+        background-color: #3498db;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        text-decoration: none;
+        border-radius: 4px;
+        margin: 0 0.5rem;
+        transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+        background-color: #2980b9;
+        text-decoration: none;
+        color: white;
+    }
+</style>
