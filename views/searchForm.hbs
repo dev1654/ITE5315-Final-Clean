@@ -13,16 +13,16 @@
         <div class="form-group">
             <label for="searchType">Search By:</label>
             <select id="searchType" name="searchType" onchange="toggleSearchFields()">
-                <option value="name" {{#if (eq formData.searchType "name")}}selected{{/if}}>Property Name</option>
-                <option value="id" {{#if (eq formData.searchType "id")}}selected{{/if}}>Property ID</option>
-                <option value="neighbourhood" {{#if (eq formData.searchType "neighbourhood")}}selected{{/if}}>Neighbourhood</option>
-                <option value="property_type" {{#if (eq formData.searchType "property_type")}}selected{{/if}}>Property Type</option>
-                <option value="all" {{#if (eq formData.searchType "all")}}selected{{/if}}>All Fields</option>
+                <option value="name" {{#if formData.searchType}}{{#if (formData.searchType '==' 'name')}}selected{{/if}}{{/if}}>Property Name</option>
+                <option value="id" {{#if formData.searchType}}{{#if (formData.searchType '==' 'id')}}selected{{/if}}{{/if}}>Property ID</option>
+                <option value="neighbourhood" {{#if formData.searchType}}{{#if (formData.searchType '==' 'neighbourhood')}}selected{{/if}}{{/if}}>Neighbourhood</option>
+                <option value="property_type" {{#if formData.searchType}}{{#if (formData.searchType '==' 'property_type')}}selected{{/if}}{{/if}}>Property Type</option>
+                <option value="all" {{#if formData.searchType}}{{#if (formData.searchType '==' 'all')}}selected{{/if}}{{/if}}>All Fields</option>
             </select>
         </div>
 
         <!-- Name Search -->
-        <div class="search-field" id="nameField" {{#unless (eq formData.searchType "name")}}style="display: none;"{{/unless}}>
+        <div class="search-field" id="nameField" {{#unless formData.searchType}}{{else if (formData.searchType '!=' 'name')}}style="display:none;"{{/unless}}>
             <div class="form-group">
                 <label for="name">Property Name:</label>
                 <input type="text" id="name" name="name"
@@ -32,7 +32,7 @@
         </div>
 
         <!-- ID Search -->
-        <div class="search-field" id="idField" {{#unless (eq formData.searchType "id")}}style="display: none;"{{/unless}}>
+        <div class="search-field" id="idField" {{#unless formData.searchType}}{{else if (formData.searchType '!=' 'id')}}style="display:none;"{{/unless}}>
             <div class="form-group">
                 <label for="id">Property ID:</label>
                 <input type="text" id="id" name="id"
@@ -42,7 +42,7 @@
         </div>
 
         <!-- Neighbourhood Search -->
-        <div class="search-field" id="neighbourhoodField" {{#unless (eq formData.searchType "neighbourhood")}}style="display: none;"{{/unless}}>
+        <div class="search-field" id="neighbourhoodField" {{#unless formData.searchType}}{{else if (formData.searchType '!=' 'neighbourhood')}}style="display:none;"{{/unless}}>
             <div class="form-group">
                 <label for="neighbourhood">Neighbourhood:</label>
                 <input type="text" id="neighbourhood" name="neighbourhood"
@@ -52,7 +52,7 @@
         </div>
 
         <!-- Property Type Search -->
-        <div class="search-field" id="propertyTypeField" {{#unless (eq formData.searchType "property_type")}}style="display: none;"{{/unless}}>
+        <div class="search-field" id="propertyTypeField" {{#unless formData.searchType}}{{else if (formData.searchType '!=' 'property_type')}}style="display:none;"{{/unless}}>
             <div class="form-group">
                 <label for="property_type">Property Type:</label>
                 <input type="text" id="property_type" name="property_type"
@@ -62,7 +62,7 @@
         </div>
 
         <!-- All Fields Search -->
-        <div class="search-field" id="allField" {{#unless (eq formData.searchType "all")}}style="display: none;"{{/unless}}>
+        <div class="search-field" id="allField" {{#unless formData.searchType}}{{else if (formData.searchType '!=' 'all')}}style="display:none;"{{/unless}}>
             <div class="form-group">
                 <label for="allTerms">Search All Fields:</label>
                 <input type="text" id="allTerms" name="allTerms"
@@ -102,7 +102,6 @@
         });
     }
 
-    // Initialize on page load
     document.addEventListener('DOMContentLoaded', function() {
         toggleSearchFields();
     });
